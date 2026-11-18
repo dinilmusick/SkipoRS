@@ -55,12 +55,24 @@ fn environment_conflicts_duplicates_and_unknowns_fail_closed() {
         verify_env(legacy),
         Err(errors) if errors.contains(&ContractError::Unknown("DEPM_GATEWAY_DOMAIN".to_owned()))
     ));
-    assert!(plan_env("SYSTEM_DATABASE_URL=db\nAPP_URL=a\nSYSTEM_DATABASE_URL_2=db2\nSYSTEM_DATABASE_URL_3=db3\n").is_ok());
+    assert!(plan_env(
+        "SYSTEM_DATABASE_URL=db\nAPP_URL=a\nSYSTEM_DATABASE_URL_2=db2\nSYSTEM_DATABASE_URL_3=db3\n"
+    )
+    .is_ok());
 }
 
 #[test]
 fn deterministic_scaffold_rejects_unsafe_names_and_is_never_blank() {
-    for invalid in ["", "-app", "app-", "Foo", "../escape", "hello/world", "hi there", "a_b"] {
+    for invalid in [
+        "",
+        "-app",
+        "app-",
+        "Foo",
+        "../escape",
+        "hello/world",
+        "hi there",
+        "a_b",
+    ] {
         assert!(!valid_slug(invalid));
         assert_eq!(plan_rust_scaffold(invalid), Err(ContractError::InvalidSlug));
     }
@@ -93,7 +105,10 @@ fn scaffold_writes_new_projects_without_overwriting_existing_data() {
         write_rust_scaffold(&app, "native-app"),
         Err(ContractError::UnsafePath)
     );
-    assert_eq!(fs::read_to_string(app.join("Cargo.toml")).unwrap(), original);
+    assert_eq!(
+        fs::read_to_string(app.join("Cargo.toml")).unwrap(),
+        original
+    );
     assert!(app.join("src/main.rs").is_file());
     assert_eq!(
         write_rust_scaffold(&root.join("../unsafe"), "../unsafe"),
