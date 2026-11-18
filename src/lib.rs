@@ -2,3 +2,5 @@
 //! The crate currently exposes only the independently verified environment slice.
 
 pub mod environment;
+
+pub mod scaffold;
