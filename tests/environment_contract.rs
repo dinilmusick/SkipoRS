@@ -62,7 +62,9 @@ fn deprecated_alias_preserves_values_and_export_prefix() {
     let plan = plan_env_file(input, true).unwrap();
     assert_eq!(plan.changes.len(), 1);
     assert_eq!(plan.changes[0].to, "APP_URL");
-    assert!(plan.proposed.contains("  export APP_URL = https://app.example/path?q=1#anchor"));
+    assert!(plan
+        .proposed
+        .contains("  export APP_URL = https://app.example/path?q=1#anchor"));
     assert!(!plan.proposed.contains("DEPM_GATEWAY_DOMAIN"));
     assert!(plan_env_file(&plan.proposed, true).unwrap().is_noop());
 }
@@ -71,7 +73,8 @@ fn deprecated_alias_preserves_values_and_export_prefix() {
 fn primary_database_alias_is_migrated_without_touching_connection_string() {
     let input = "SYSTEM_DATABASE_URL_1=postgres://user:pass@localhost:5432/db?sslmode=require\nAPP_URL=https://x.test\n";
     let output = plan_env_file(input, true).unwrap().proposed;
-    assert!(output.contains("SYSTEM_DATABASE_URL=postgres://user:pass@localhost:5432/db?sslmode=require"));
+    assert!(output
+        .contains("SYSTEM_DATABASE_URL=postgres://user:pass@localhost:5432/db?sslmode=require"));
     assert!(!output.contains("SYSTEM_DATABASE_URL_1="));
 }
 
@@ -119,19 +122,26 @@ fn undeclared_app_secret_does_not_get_normalized_or_accepted() {
 #[test]
 fn platform_and_tooling_variables_are_not_app_configuration() {
     for invalid in ["NODE_ENV", "CI", "SKIPO_VERSION", "ADMIN_PASSWORD"] {
-        let input = format!("SYSTEM_DATABASE_URL=postgres://db\nAPP_URL=https://example.test\n{invalid}=set\n");
+        let input = format!(
+            "SYSTEM_DATABASE_URL=postgres://db\nAPP_URL=https://example.test\n{invalid}=set\n"
+        );
         let errors = plan_env_file(&input, true).unwrap_err();
-        assert!(has_kind(&errors, DiagnosticKind::NotApplicationConfiguration));
+        assert!(has_kind(
+            &errors,
+            DiagnosticKind::NotApplicationConfiguration
+        ));
     }
 }
 
 #[test]
 fn duplicate_and_invalid_assignments_fail_closed() {
-    let errors = plan_env_file("APP_URL=a\nAPP_URL=b\nSYSTEM_DATABASE_URL=db\n", true)
-        .unwrap_err();
+    let errors = plan_env_file("APP_URL=a\nAPP_URL=b\nSYSTEM_DATABASE_URL=db\n", true).unwrap_err();
     assert!(has_kind(&errors, DiagnosticKind::Duplicate));
-    let errors = plan_env_file("APP_URL=https://x.test\nSYSTEM_DATABASE_URL=db\nlowercase_key=x\n", true)
-        .unwrap_err();
+    let errors = plan_env_file(
+        "APP_URL=https://x.test\nSYSTEM_DATABASE_URL=db\nlowercase_key=x\n",
+        true,
+    )
+    .unwrap_err();
     assert!(has_kind(&errors, DiagnosticKind::InvalidAssignment));
 }
 
