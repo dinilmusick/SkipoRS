@@ -1,0 +1,165 @@
+{
+  "schema_version": 2,
+  "contract_version": "2.0.0",
+  "canonical": {
+    "required": [
+      "SYSTEM_DATABASE_URL",
+      "APP_URL"
+    ],
+    "optional": [
+      "SYSTEM_DATABASE_URL_2",
+      "SYSTEM_DATABASE_URL_3"
+    ]
+  },
+  "deprecated_aliases": {
+    "DEPM_GATEWAY_DOMAIN": {
+      "target": "APP_URL",
+      "reason": "Legacy DEPM origin; replace only the variable name, never its value."
+    },
+    "SYSTEM_DATABASE_URL_1": {
+      "target": "SYSTEM_DATABASE_URL",
+      "reason": "Legacy primary database name; preserve its connection string."
+    }
+  },
+  "runtime_platform": {
+    "NODE_ENV": "Node.js runtime mode",
+    "NEXT_RUNTIME": "Next.js instrumentation runtime discriminator supplied by Next.js",
+    "PORT": "Hosting adapter's server port",
+    "CI": "CI platform execution marker",
+    "DISABLE_HMR": "Vite local developer server tooling switch",
+    "PATH": "Operating system process path",
+    "HOME": "Operating system home directory",
+    "PWD": "Operating system working directory",
+    "GITHUB_ACTIONS": "GitHub Actions execution marker",
+    "GITHUB_ENV": "GitHub Actions environment file path",
+    "GITHUB_OUTPUT": "GitHub Actions step output path",
+    "GITHUB_PATH": "GitHub Actions path output",
+    "GITHUB_STEP_SUMMARY": "GitHub Actions summary output path",
+    "GITHUB_WORKSPACE": "GitHub Actions checkout directory",
+    "GITHUB_REPOSITORY": "GitHub Actions repository identity",
+    "GITHUB_REF": "GitHub Actions ref",
+    "GITHUB_SHA": "GitHub Actions commit SHA",
+    "GITHUB_RUN_ID": "GitHub Actions run identity",
+    "VERCEL_ENV": "Vercel deployment environment",
+    "VERCEL_URL": "Vercel deployment hostname",
+    "VERCEL_REGION": "Vercel region",
+    "CF_PAGES": "Cloudflare Pages execution indicator",
+    "CF_PAGES_URL": "Cloudflare Pages deployment URL",
+    "CF_PAGES_BRANCH": "Cloudflare Pages branch"
+  },
+  "internal_tooling": {
+    "ADMIN_EMAIL": "Explicit administrator bootstrap command input, never application runtime configuration",
+    "ADMIN_PASSWORD": "Explicit administrator bootstrap command input, never application runtime configuration",
+    "API_BASE_URL": "Skipo API smoke test input",
+    "APP_PATH": "Standalone conformance workflow's validated target path",
+    "APP_REPOSITORY": "Preview inspection workflow input",
+    "ECOSYSTEM_SYNC_TOKEN": "Skipo dependency synchronization workflow secret",
+    "GITHUB_OWNER": "Internal secrets synchronization repository owner input",
+    "INPUT_PATH": "Standalone conformance workflow's selected relative application path",
+    "INSTALL_OUTCOME": "Standalone conformance workflow's frozen install result",
+    "MANIFEST_PATH": "Preview inspection manifest input",
+    "NODE_PATH": "Skipo preview inspector module resolution",
+    "PREVIEW_URL": "Preview inspection workflow input",
+    "PYTHON_BIN": "Skipo checklist runner interpreter selection",
+    "REQUIRE_LIVE": "Standalone conformance workflow's live-verification flag",
+    "ROOT_VERSION": "Skipo release workflow variable",
+    "SKIPO_APP_ROOT": "Skipo preview inspection workspace",
+    "SKIPO_INSPECTION_MANIFEST": "Skipo preview inspector manifest override",
+    "SKIPO_OPERATION": "Skipo maintenance workflow selector",
+    "SKIPO_PREVIEW_URL": "Skipo preview inspector URL override",
+    "SKIPO_PYTHON": "Skipo CLI tooling interpreter override",
+    "SKIPO_REGISTRY_VERSION": "Skipo npm package publication verification input",
+    "SKIPO_VERSION": "Skipo release CLI version",
+    "SYNC_TOKEN": "Skipo dependency synchronization step secret",
+    "TAG_VERSION": "Skipo release tag version",
+    "FRAMEWORK": "Skipo CI generated-app matrix framework selector; never an application configuration variable",
+    "ISSUE_COMMIT_SHA": "Owner-issued, exact checked-out commit pin for Skipo trusted npm publication; never app configuration"
+  },
+  "restricted_tooling": {
+    "ADMIN_EMAIL": [
+      "scripts/create-admin.ts"
+    ],
+    "ADMIN_PASSWORD": [
+      "scripts/create-admin.ts"
+    ],
+    "APP_PATH": [
+      ".github/workflows/skipo-conformance.yml"
+    ],
+    "ECOSYSTEM_SYNC_TOKEN": [
+      ".github/workflows/dependency-sync.yml"
+    ],
+    "GITHUB_OWNER": [
+      "scripts/sync-ecosystem-secrets.mjs"
+    ],
+    "INPUT_PATH": [
+      ".github/workflows/skipo-conformance.yml"
+    ],
+    "INSTALL_OUTCOME": [
+      ".github/workflows/skipo-conformance.yml"
+    ],
+    "REQUIRE_LIVE": [
+      ".github/workflows/skipo-conformance.yml"
+    ],
+    "SKIPO_PYTHON": [
+      "bin/skipo.js",
+      "packages/skipo/bin/skipo.js"
+    ],
+    "SKIPO_REGISTRY_VERSION": [
+      ".github/workflows/verify-published-skipo.yml",
+      ".github/workflows/publish-skipo-cli.yml"
+    ],
+    "FRAMEWORK": [
+      ".github/workflows/ci.yml"
+    ],
+    "ISSUE_COMMIT_SHA": [
+      ".github/workflows/publish-skipo-cli.yml"
+    ]
+  },
+  "tooling_locations": [
+    "scripts/",
+    "checklists/",
+    "bin/",
+    "packages/skipo/bin/",
+    ".github/",
+    "tests/"
+  ],
+  "scan": {
+    "extensions": [
+      ".ts",
+      ".tsx",
+      ".js",
+      ".jsx",
+      ".mjs",
+      ".cjs",
+      ".py",
+      ".sh",
+      ".bash",
+      ".zsh",
+      ".toml",
+      ".json",
+      ".jsonc",
+      ".yaml",
+      ".yml",
+      ".ini",
+      ".cfg",
+      ".properties",
+      ".md",
+      ".mdx",
+      ".txt"
+    ],
+    "ignored_directories": [
+      ".git",
+      "node_modules",
+      ".venv",
+      "venv",
+      "__pycache__",
+      "dist",
+      "build",
+      ".next",
+      ".turbo",
+      "coverage",
+      ".cache",
+      ".pytest_cache"
+    ]
+  }
+}
