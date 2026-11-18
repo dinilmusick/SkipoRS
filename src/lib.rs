@@ -177,7 +177,9 @@ pub fn write_rust_scaffold(root: &Path, slug: &str) -> Result<(), ContractError>
     let parent = root.parent().ok_or(ContractError::UnsafePath)?;
     if !root.is_absolute()
         || root.file_name().and_then(|name| name.to_str()) != Some(slug)
-        || root.components().any(|part| matches!(part, std::path::Component::ParentDir))
+        || root
+            .components()
+            .any(|part| matches!(part, std::path::Component::ParentDir))
         || !parent.is_dir()
         || parent.is_symlink()
         || root.exists()
