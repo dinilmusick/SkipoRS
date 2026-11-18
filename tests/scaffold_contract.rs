@@ -1,7 +1,5 @@
 use skipo_rs::environment::plan_env_file;
-use skipo_rs::scaffold::{
-    plan_rust_scaffold, valid_slug, write_rust_scaffold, ScaffoldError,
-};
+use skipo_rs::scaffold::{plan_rust_scaffold, valid_slug, write_rust_scaffold, ScaffoldError};
 use std::fs;
 use std::path::PathBuf;
 use std::time::{SystemTime, UNIX_EPOCH};
