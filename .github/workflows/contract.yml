@@ -17,5 +17,7 @@ jobs:
         run: cargo fmt --all -- --check
       - name: Test fail-closed environment and scaffold contracts
         run: cargo test --all-targets
+      - name: Verify generated Rust application
+        run: cargo run --example scaffold_consumer
       - name: Check warnings
         run: cargo clippy --all-targets -- -D warnings
