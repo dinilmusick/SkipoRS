@@ -28,8 +28,56 @@ pub fn classify(name: &str) -> VariableClass {
         "SYSTEM_DATABASE_URL_2" | "SYSTEM_DATABASE_URL_3" => VariableClass::CanonicalOptional,
         "DEPM_GATEWAY_DOMAIN" => VariableClass::DeprecatedAlias("APP_URL"),
         "SYSTEM_DATABASE_URL_1" => VariableClass::DeprecatedAlias("SYSTEM_DATABASE_URL"),
-        "NODE_ENV" | "NEXT_RUNTIME" | "PORT" | "CI" | "DISABLE_HMR" | "PATH" | "HOME" | "PWD" | "GITHUB_ACTIONS" | "GITHUB_ENV" | "GITHUB_OUTPUT" | "GITHUB_PATH" | "GITHUB_STEP_SUMMARY" | "GITHUB_WORKSPACE" | "GITHUB_REPOSITORY" | "GITHUB_REF" | "GITHUB_SHA" | "GITHUB_RUN_ID" | "VERCEL_ENV" | "VERCEL_URL" | "VERCEL_REGION" | "CF_PAGES" | "CF_PAGES_URL" | "CF_PAGES_BRANCH" => VariableClass::RuntimePlatform,
-        "ADMIN_EMAIL" | "ADMIN_PASSWORD" | "API_BASE_URL" | "APP_PATH" | "APP_REPOSITORY" | "ECOSYSTEM_SYNC_TOKEN" | "GITHUB_OWNER" | "INPUT_PATH" | "INSTALL_OUTCOME" | "MANIFEST_PATH" | "NODE_PATH" | "PREVIEW_URL" | "PYTHON_BIN" | "REQUIRE_LIVE" | "ROOT_VERSION" | "SKIPO_APP_ROOT" | "SKIPO_INSPECTION_MANIFEST" | "SKIPO_OPERATION" | "SKIPO_PREVIEW_URL" | "SKIPO_PYTHON" | "SKIPO_REGISTRY_VERSION" | "SKIPO_VERSION" | "SYNC_TOKEN" | "TAG_VERSION" | "FRAMEWORK" | "ISSUE_COMMIT_SHA" => VariableClass::InternalTooling,
+        "NODE_ENV"
+        | "NEXT_RUNTIME"
+        | "PORT"
+        | "CI"
+        | "DISABLE_HMR"
+        | "PATH"
+        | "HOME"
+        | "PWD"
+        | "GITHUB_ACTIONS"
+        | "GITHUB_ENV"
+        | "GITHUB_OUTPUT"
+        | "GITHUB_PATH"
+        | "GITHUB_STEP_SUMMARY"
+        | "GITHUB_WORKSPACE"
+        | "GITHUB_REPOSITORY"
+        | "GITHUB_REF"
+        | "GITHUB_SHA"
+        | "GITHUB_RUN_ID"
+        | "VERCEL_ENV"
+        | "VERCEL_URL"
+        | "VERCEL_REGION"
+        | "CF_PAGES"
+        | "CF_PAGES_URL"
+        | "CF_PAGES_BRANCH" => VariableClass::RuntimePlatform,
+        "ADMIN_EMAIL"
+        | "ADMIN_PASSWORD"
+        | "API_BASE_URL"
+        | "APP_PATH"
+        | "APP_REPOSITORY"
+        | "ECOSYSTEM_SYNC_TOKEN"
+        | "GITHUB_OWNER"
+        | "INPUT_PATH"
+        | "INSTALL_OUTCOME"
+        | "MANIFEST_PATH"
+        | "NODE_PATH"
+        | "PREVIEW_URL"
+        | "PYTHON_BIN"
+        | "REQUIRE_LIVE"
+        | "ROOT_VERSION"
+        | "SKIPO_APP_ROOT"
+        | "SKIPO_INSPECTION_MANIFEST"
+        | "SKIPO_OPERATION"
+        | "SKIPO_PREVIEW_URL"
+        | "SKIPO_PYTHON"
+        | "SKIPO_REGISTRY_VERSION"
+        | "SKIPO_VERSION"
+        | "SYNC_TOKEN"
+        | "TAG_VERSION"
+        | "FRAMEWORK"
+        | "ISSUE_COMMIT_SHA" => VariableClass::InternalTooling,
         _ => VariableClass::Undeclared,
     }
 }
