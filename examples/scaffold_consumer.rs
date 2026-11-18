@@ -6,7 +6,8 @@ use std::time::{SystemTime, UNIX_EPOCH};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let suffix = SystemTime::now().duration_since(UNIX_EPOCH)?.as_nanos();
-    let root = std::env::temp_dir().join(format!("skipors-consumer-{}-{suffix}", std::process::id()));
+    let root =
+        std::env::temp_dir().join(format!("skipors-consumer-{}-{suffix}", std::process::id()));
     fs::create_dir(&root)?;
     let app = root.join("native-app");
     let result = (|| -> Result<(), Box<dyn std::error::Error>> {
@@ -25,7 +26,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             .arg(app.join("Cargo.toml"))
             .output()?;
         if !output.status.success() {
-            return Err(format!("generated Cargo execution failed: {}", String::from_utf8_lossy(&output.stderr)).into());
+            return Err(format!(
+                "generated Cargo execution failed: {}",
+                String::from_utf8_lossy(&output.stderr)
+            )
+            .into());
         }
         assert!(String::from_utf8(output.stdout)?.contains("Configure canonical providers"));
         Ok(())
