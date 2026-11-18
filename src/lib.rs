@@ -175,7 +175,14 @@ pub fn plan_rust_scaffold(slug: &str) -> Result<BTreeMap<String, String>, Contra
 pub fn write_rust_scaffold(root: &Path, slug: &str) -> Result<(), ContractError> {
     let files = plan_rust_scaffold(slug)?;
     let parent = root.parent().ok_or(ContractError::UnsafePath)?;
-    if !parent.is_dir() || parent.is_symlink() || root.exists() || root.is_symlink() {
+    if !root.is_absolute()
+        || root.file_name().and_then(|name| name.to_str()) != Some(slug)
+        || root.components().any(|part| matches!(part, std::path::Component::ParentDir))
+        || !parent.is_dir()
+        || parent.is_symlink()
+        || root.exists()
+        || root.is_symlink()
+    {
         return Err(ContractError::UnsafePath);
     }
     std::fs::create_dir(root).map_err(|error| ContractError::Io(error.to_string()))?;
