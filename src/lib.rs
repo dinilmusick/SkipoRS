@@ -91,7 +91,7 @@ pub fn plan_env(source: &str) -> Result<EnvPlan, Vec<ContractError>> {
             let prefix_len = body.len() - body.trim_start().len();
             let tail = &body[prefix_len..];
             let after_export = tail.strip_prefix("export ").unwrap_or(tail);
-            if let Some((key, value)) = after_export.split_once('=') {
+            if let Some((key, _value)) = after_export.split_once('=') {
                 if key.trim() == LEGACY_APP_URL {
                     let key_start = body.find(LEGACY_APP_URL).unwrap_or(0);
                     format!(
