@@ -22,6 +22,12 @@ cargo clippy --all-targets -- -D warnings
 
 Public CI runs the complete matrix on Linux, macOS and Windows.
 
+## Stacked native scaffold feature (PR #2 replacement)
+
+The additional `skipo_rs::scaffold` module creates deterministic minimal Rust project files, including an example environment from the **authoritative** v2 environment module. It refuses invalid slugs, relative or traversal paths and overwriting existing project directories. The `scaffold_consumer` example independently compiles and executes the generated Cargo project in a temporary directory. All three CI operating systems run this integration.
+
+This is deliberately **stacked on the environment-governance PR**, avoiding a competing, weaker second environment implementation. The generated application is only a shell; canonical Luth, Floks, Kloks, workspaces and storage remain provider-owned.
+
 ## Explicit remaining parity gaps
 
 This is a **partial implementation**, not full Skipo parity. The current Rust crate does **not** implement the current Next.js/Vite project generator, framework graph composer, capability ownership registry, application identity, dependency resolution/migration, transactional repair journal, full workspace/source-reference scanner, browser/runtime conformance engine or downstream integration. Unknown configuration is rejected rather than guessed. Continue against the pinned canonical upstream interfaces and add separate cross-language fixtures as features are implemented. ATAX schedules no agents; SkipoRS does not spawn any agents.
