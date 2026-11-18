@@ -111,6 +111,14 @@ fn scaffold_writes_new_projects_without_overwriting_existing_data() {
     );
     assert!(app.join("src/main.rs").is_file());
     assert_eq!(
+        write_rust_scaffold(&root.join("different"), "native-app"),
+        Err(ContractError::UnsafePath)
+    );
+    assert_eq!(
+        write_rust_scaffold(&PathBuf::from("relative-app"), "relative-app"),
+        Err(ContractError::UnsafePath)
+    );
+    assert_eq!(
         write_rust_scaffold(&root.join("../unsafe"), "../unsafe"),
         Err(ContractError::InvalidSlug)
     );
